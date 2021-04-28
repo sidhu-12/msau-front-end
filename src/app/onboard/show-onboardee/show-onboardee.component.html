@@ -1,0 +1,63 @@
+    <mat-card class="header">
+        <h1>
+            Search Result for <b> {{ searchResultQuery }}</b>
+        </h1>
+    </mat-card>
+    <div  class= "result"fxLayout="row wrap " fxLayoutAlign="bottom center" fxLayoutGap = "20px">
+        <mat-card *ngIf ="resultEmpty">
+            NO RESULTS AVAILABLE
+        </mat-card>
+        <mat-card class ="cards" *ngFor ="let result of showResultData ;let  i = index">
+            <mat-card-title>
+                {{ result.name }}
+             </mat-card-title>
+            <mat-card-subtitle>
+                <mat-label>
+                    <b> Email </b> : {{ result.email }}
+                </mat-label>
+                <br/>
+                <mat-label>
+                    <b>Phone Number </b> : {{ result.phoneNo }}
+                </mat-label>
+                <br/>
+                <br/>
+            </mat-card-subtitle>
+            <mat-card-content>
+                <mat-label>
+                    <b> Demand ID </b>: {{ result.demandId }}
+                </mat-label>
+                <br/>
+                <br/>
+                <mat-label>
+                    <b>  Location </b>: {{ result.location }}
+                </mat-label>
+                <br/>
+                <br/>
+                <mat-label>
+                    <b> Skills </b>  : {{ result.skills }}
+                </mat-label> 
+                <br/>
+                <br/>   
+                <mat-label>
+                <b>  Starting Date </b>: {{ result.startDate }}
+                </mat-label>
+                <br/>
+                <br/>
+                <mat-label>
+                    <b> Background Check Status </b> : {{ result.backgroundCheckStatus }}
+                </mat-label>
+                <br/>
+                <br/>
+                <mat-label>
+                    <b>Onboarding Status </b> : {{ result.onBoardStatus }}
+                 </mat-label>
+                <br/>
+                <br/>
+            </mat-card-content>
+            <mat-card-actions position="bottom">
+                <button mat-stroked-button color=primary class="btn-small" (click) ="updateOnboardee(i)" matTooltip="Update Onboardee"><i class ="material-icons">update</i></button>
+                <button mat-stroked-button color=accent class="btn-small" (click) ="openOnboardeeDialog(i)" matTooltip="Delete Onboardee"><i class ="material-icons">delete</i></button>
+            </mat-card-actions>
+            <mat-divider></mat-divider>
+        </mat-card>
+    </div>

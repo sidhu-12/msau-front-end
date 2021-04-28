@@ -1,0 +1,14 @@
+<mat-toolbar color="primary" class="app-header">
+    <div class="header">MS AU PORTAL</div>
+    <span class="nav-tool-items">
+        <a mat-button  routerLink="updateSoon" routerLinkActive="mat-button-raised">Opportunity Management</a>
+        <a mat-button  routerLink="updateSoon" routerLinkActive="active">Candidate Management</a>
+        <a mat-button  routerLink="updateSoon" routerLinkActive="active">Course Management</a>
+        <a mat-button  routerLink="updateSoon" routerLinkActive="active">Assesment</a>
+        <a mat-button  routerLink="dashboard" routerLinkActive="mat-button-raised">Onboarding</a>
+        <!-- <a mat-button  routerLink="register" routerLinkActive="active">Register</a> -->
+        <a mat-button (click) ="logOut()" routerLinkActive="active">Logout</a>
+        <a mat-button  routerLinkActive="active"><h4>{{ name }}</h4></a>
+      <i class="material-icons">person</i>
+    </span>
+   </mat-toolbar>

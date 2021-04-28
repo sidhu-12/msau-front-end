@@ -1,0 +1,36 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Register</mat-card-title>
+      </mat-card-header>
+  
+      <form class="ex-form" [formGroup]="registerForm" (ngSubmit)="register()">
+  
+        <mat-card-content>
+          <mat-form-field class="ex-full-width">
+            <input matInput formControlName= "name" placeholder="Full Name">
+          </mat-form-field>
+          <!-- <mat-error *ngIf="name.invalid">{{ getNameErrorMessage() }}</mat-error> -->
+  
+          <mat-form-field class="ex-full-width">
+            <input matInput formControlName = "email" placeholder="Email" >
+          </mat-form-field>
+          <!-- <mat-error *ngIf="email.invalid">{{ getEmailErrorMessage() }}</mat-error> -->
+          <mat-form-field class="ex-full-width">
+            <input type="password" formControlName = "password" matInput placeholder="Enter Password">
+            <mat-hint>Password must contain minimum 8 characters consisting  atleast a capital letter, a small letter and a special character</mat-hint>
+          </mat-form-field>
+          <!-- <mat-error *ngIf="password.invalid">{{ getPasswordErrorMessage() }}</mat-error> -->
+          <mat-form-field class="ex-full-width">
+            <input type="password" formControlName = "reEnterPassword" matInput placeholder="Re-type Password">
+          </mat-form-field>
+          <!-- <mat-error *ngIf="reEnterPassword.invalid">{{ getReEnterPasswordErrorMessage() }}</mat-error> -->
+
+  
+        </mat-card-content>
+  
+        <button mat-stroked-button color="accent" class="btn-block">Register</button>
+  
+      </form>
+    </mat-card>
+  </div>
