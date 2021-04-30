@@ -14,7 +14,7 @@ export class AppComponent {
   {
 
   }
-  isLoggedIn(){
+  isLoggedIn(){ // For change in nav bar
     return this.service.isLoggedIn();
   }
 }

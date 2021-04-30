@@ -1,11 +1,11 @@
 
-
 <mat-toolbar color="primary" class="app-header" *ngIf = "!isLoggedIn()">
- <div class="header">MS AU PORTAL</div>
- <span class="nav-tool-items">
-   <a mat-button routerLink="/" routerLinkActive="active">Log in</a>
-   
- </span>
+  <div class="header">
+    MS AU PORTAL
+  </div>
+  <span class="nav-tool-items">
+    <a mat-button routerLink="/" routerLinkActive="active">Log in</a>
+  </span>
 </mat-toolbar>
 <!-- This is used for application nav bar change after login -->
 <app-navbar *ngIf = "isLoggedIn()"></app-navbar>

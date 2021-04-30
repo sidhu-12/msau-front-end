@@ -32,7 +32,7 @@ import { WillupdatesoonComponent } from './willupdatesoon/willupdatesoon.compone
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    AngularMaterialModule,
+    AngularMaterialModule, // Used for frontEnd template
     FormsModule,
     FlexLayoutModule,
     SocialLoginModule,
@@ -40,7 +40,7 @@ import { WillupdatesoonComponent } from './willupdatesoon/willupdatesoon.compone
   ],
   providers: [
   {
-      provide: 'SocialAuthServiceConfig',
+      provide: 'SocialAuthServiceConfig',  // Used for Open Authentication as AccoliteDigital
       useValue: {
         autoLogin:false,
       providers:[ 
