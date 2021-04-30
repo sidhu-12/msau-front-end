@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as HighCharts from 'angular-highcharts';
-import { attr, Point } from 'highcharts';
-import { attributeList } from 'src/app/onboard/shared/attributeList';
+import { attributeListForChart } from '../attributeForChart';
+import { ChartData } from '../chartData';
 import { TrendService } from '../trend.service';
 
 @Component({
@@ -12,70 +12,120 @@ import { TrendService } from '../trend.service';
 })
 export class ChartExampleComponent implements OnInit {
 
-  locationData:
-  {
-    location: string[],
-    count :number [],
-  }
+  chartData: ChartData
   // attributeName : FormControl;
-  attributeList : typeof attributeList;
+  attributeList : typeof attributeListForChart;
+  year : number;
   attributeValue : string;
   public chart: HighCharts.Chart = new HighCharts.Chart();
   showChart :boolean
    constructor(
     private service :TrendService
   ) { 
-    this.attributeValue ="None";
-    this.attributeList = attributeList;
+    this.attributeValue = "";
+    this.attributeList = attributeListForChart;
     this.showChart = false;
-    this.locationData = {
-      location :[],
+   this.year = 0;
+    this.chartData = {
+      attributeName :[],
       count :[]
     }
-      this.createChartData({
-        value : "location"
+      this.createChartDataWithAttribute({
+        value : "skills"
       }
       ).then(()=>{
-        console.log(this.locationData);
+        console.log(this.chartData);
         console.log(this.chart); 
     });
-  
-
-  
-   setTimeout(()=>{
-     console.log(this.chart);
-     this.showChart = true;
-   },500);
-  //  this.attributeName.valueChanges.pipe().subscribe(
-  //    (value)=>{
-  //      console.log(value);
-  //      this.createChartData(value).catch((data)=>{
-
-  //      });
-  //     },
-  //    err=>{
-  //      throw err;
-  //    }
-  //  )
   }
 
 
 async ngOnInit() {
 }
   
-    async createChartData(evt : any){
-      // this.attributeValue = newValue;
-      console.log(evt);
+    async createChartDataWithAttribute(evt : any){
+      // console.log(evt);
       this.showChart = false;
-      let attribute = evt.value ;
-      this.locationData =  await this.service.generateDataForChart(attribute,2021);
-      // this.chart = new HighCharts.Chart ();
+      this.attributeValue = evt.value;
+       let attribute = evt.value ;
+      this.chartData =  await this.service.generateDataForChart(attribute,this.year);
+      setTimeout(()=>{
+        if(evt.value == "skills")
+      {
+        console.log(JSON.stringify(this.chartData));
+        this.chartData = this.service.changeStructure(this.chartData);
+        console.log(JSON.stringify(this.chartData));
+        
+      }
+    },50);
+    setTimeout(()=>{
+    this.chart = new HighCharts.Chart({
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: 'Hiring based on '+attribute
+      },
+      yAxis: {
+        title: {
+          text: 'Number of Employees '
+        },
+      },
+    
+      xAxis: {
+  
+          categories : this.chartData.attributeName
+        
+      },
+      legend: {
+        layout: 'vertical',
+        align: 'right',
+        verticalAlign: 'middle',
+        
+    },
+
+      credits: {
+        enabled: false
+      },
+      series: [
+        {
+      name: "Overall count",
+      type : "column",
+      data:this.chartData.count,
+      },
+      {
+        name: "Overall Count",
+        type : "line",
+        data:this.chartData.count,
+      },
+    ]
+   });
+    console.log(this.chart);
+    this.showChart = true;
+  },200);
+         
+  }
+  async createChartDataWithYear(evt : any){
+    // this.attributeValue = newValue;
+    this.showChart = false;
+     this.year = evt.value ;
+    this.chartData =  await this.service.generateDataForChart(this.attributeValue,this.year);
+    setTimeout(()=>
+    {
+      if(this.attributeValue == "skills")
+      { 
+        console.log(JSON.stringify(this.chartData));
+        this.chartData = this.service.changeStructure(this.chartData);
+        console.log(JSON.stringify(this.chartData));
+      }
+    },50);
+    setTimeout(()=>{
       this.chart = new HighCharts.Chart({
         chart: {
           type: "column"
         },
         title: {
-          text: 'Hiring based on '+attribute
+          text: 'Hiring based on '+this.attributeValue
         },
         yAxis: {
           title: {
@@ -84,8 +134,8 @@ async ngOnInit() {
         },
       
         xAxis: {
-    
-            categories : this.locationData.location
+
+            categories : this.chartData.attributeName
           
         },
         legend: {
@@ -94,24 +144,27 @@ async ngOnInit() {
           verticalAlign: 'middle',
           
       },
-  
+
         credits: {
           enabled: false
         },
-        series: [{
-        name:"2021",
+        series: [
+          {
+        name: this.year.toString(),
         type : "column",
-        data:this.locationData.count,
-        }]
-     });
-    
-   setTimeout(()=>{
-    console.log(this.chart);
-    this.showChart = true;
-  },500);
-         
+        data:this.chartData.count,
+        },
+        {
+          name: this.year.toString(),
+          type : "line",
+          data:this.chartData.count,
+        },
+      ]
+    });
+      console.log(this.chart);
+      this.showChart = true;
+    },200);
   }
-     
-    
-    }
+        
+}
   

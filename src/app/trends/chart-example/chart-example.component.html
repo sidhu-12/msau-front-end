@@ -2,15 +2,37 @@
     <mat-card>
     <mat-form-field class="ex-full-width">
         <mat-label>Attribute</mat-label>
-        <mat-select  (selectionChange) = "createChartData($event)">
-            <mat-option>None</mat-option>
+        <mat-select  value = "skills" (selectionChange) = "createChartDataWithAttribute($event)">
            <mat-option *ngFor ="let attribute of attributeList" [value] ="attribute.value">
             {{ attribute.attributeName }}
            </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field class="ex-full-width">
+            <mat-label>Year</mat-label>
+            <mat-select  value = "0" (selectionChange) = "createChartDataWithYear($event)">
+                <mat-option value = "0">
+                    Overall Count
+                </mat-option>
+               <mat-option  value = "2017">
+                    2017
+               </mat-option>
+               <mat-option  value = "2018">
+                2018
+                </mat-option>
+                <mat-option  value = "2019">
+                    2019
+                </mat-option>
+                <mat-option  value = "2020">
+                    2020
+                </mat-option>
+                <mat-option  value = "2020">
+                    2021
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
     </mat-card>
-<div class ="line-chart-example"  *ngIf = "showChart"  [chart]="chart">
+    <div class ="line-chart-example"  *ngIf = "showChart"  [chart]="chart">
 
 </div>
 </div>
