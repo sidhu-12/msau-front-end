@@ -38,13 +38,13 @@ export class OnboardService {
   updateOnboardee (updateList : Object):Observable<ResponseObject>{
     return this.http.put<ResponseObject>(environment.apiUrl+"/update",updateList,this.httpOptions);
   }
-  checkFormUpdate (formValue : any , oldValue : any) : AttributeValueObject{
-    let updateList :AttributeValueObject={
-      attributes :[],
+  checkFormUpdate (formValue : any , oldValue : any) : AttributeValueObject{   // To get a data format to send it to backend
+    let updateList :AttributeValueObject={  // this  is the required formatg
+      attributes :[], 
       values : [],
       email : [oldValue.email]
     }
-    attributeNames.forEach(attribute=>{
+    attributeNames.forEach(attribute=>{  // to check the old value has been changed and pust it into attribute and values
       if(oldValue[attribute.value] != formValue[attribute.value])
       {
           updateList.attributes.push(attribute.value);

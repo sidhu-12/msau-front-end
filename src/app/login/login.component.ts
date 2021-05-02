@@ -9,7 +9,6 @@ import { LoginService } from '../shared/login.service';
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
     form: FormGroup;
-    loading = false;
     submitted = false;
 
 
