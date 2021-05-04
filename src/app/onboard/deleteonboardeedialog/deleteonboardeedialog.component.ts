@@ -19,7 +19,14 @@ export class DeleteonboardeedialogComponent implements OnInit {
       deleteDetails : Onboardee,
     }
   ) { 
-    this.deleteOnboardeeName = this.deleteData.deleteDetails.name;
+    if(deleteData.deleteDetails != null)
+    {
+      this.deleteOnboardeeName = this.deleteData.deleteDetails.name;
+    }
+    else
+    {
+      this.deleteOnboardeeName = "";
+    }
   }
 
   ngOnInit(): void {
